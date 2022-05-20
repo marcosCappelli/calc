@@ -14,7 +14,7 @@ class calculator {
 // Primeira ação add digit to calculator screen
 // Método
 addDigit(digit) {
-    //Chega se a operação já tem um ponto operador "."
+    //Checa se a operação já tem um ponto operador "."
     if(digit === "." && this.currentOperationText.innerText.includes(".")) {
         return;
     }
@@ -27,6 +27,15 @@ addDigit(digit) {
 // Método
 // Process all calculator operation
 processOperation(operations) {
+    //Checar se current esta vazia
+    if (this.currentOperationText.innerText === "") { 
+         // Mudança operation
+        if (this.previousOperationText.innerText !== "") { 
+            this.changeOperation(operations);
+        }
+        return;
+    }
+
 
     //Obtem current and previous valkue
     let operationValue;
@@ -36,6 +45,18 @@ processOperation(operations) {
     switch (operations) {
         case "+":
             operationValue = previous + current;
+            this.updateScreen(operationValue, operations, current, previous);
+            break;
+        case "-":
+            operationValue = previous - current;
+            this.updateScreen(operationValue, operations, current, previous);
+            break;
+        case "/":
+            operationValue = previous / current;
+            this.updateScreen(operationValue, operations, current, previous);
+            break;
+        case "*":
+            operationValue = previous * current;
             this.updateScreen(operationValue, operations, current, previous);
             break;
         default:
@@ -66,8 +87,20 @@ updateScreen(
     }   
 }
 
+// change math operation
+changeOperation(operations) {
+    const mathOprations = ["*", "/", "+", "-"]
+
+    if (!mathOprations.includes(operations)) {
+        return
+    }
+        // 123 Operation = função do slice é substituir o caracter
+    this.previousOperationText.innerText = 
+        this.previousOperationText.innerText.slice(0, -1) + operations;
 }
 
+
+}
 /*Instância*/
 const calc = new calculator(previousOperationText, currentOperationText);
 
