@@ -16,8 +16,8 @@ body {
 #calc {
     width: 400px;
     padding: 0.5em;
-    background-color: rgb(113, 139, 139);
-    color: black;
+    background-color: rgb(102, 173, 173);
+    color: red;
     display: flex;
     flex-direction: column;
 }
@@ -41,12 +41,13 @@ body {
 }
 
 #previous-operation {
-    color: bisque;
+    color: black;
 }
 
 #current-operation {
     font-size: 3em;
     font-weight: 700;
+    color: black;
 }
 
 #buttons-container {

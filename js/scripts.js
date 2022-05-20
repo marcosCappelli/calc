@@ -1,11 +1,11 @@
 /*Instância*/
-const previusOperationText = document.querySelector("#previous-operation")
+const previousOperationText = document.querySelector("#previous-operation")
 const currentOperationText = document.querySelector("#current-operation")
 const buttons = document.querySelectorAll("#buttons-container button")
 
 class calculator {
-    constructor(previusOperationText, currentOperationText) {
-        this.previusOperationText = previusOperationText /*valor que está sempre impresso na tela*/
+    constructor(previousOperationText, currentOperationText) {
+        this.previousOperationText = previousOperationText /*valor que está sempre impresso na tela*/
         this.currentOperationText = currentOperationText /*valor que está sempre impresso na tela*/
         this.currentOperation = "" /*valor digitado no momento*/
     }
@@ -26,35 +26,50 @@ addDigit(digit) {
 
 // Método
 // Process all calculator operation
-processOperation(operation) {
+processOperation(operations) {
 
     //Obtem current and previous valkue
     let operationValue;
-    const previous = +this.previusOperationText.innerText;
+    const previous = +this.previousOperationText.innerText.split(" ")[0];
     const current = +this.currentOperationText.innerText;
 
-    switch (operation) {
+    switch (operations) {
         case "+":
             operationValue = previous + current;
-            this.updateScreen(operationValue, operation, current, previous);
+            this.updateScreen(operationValue, operations, current, previous);
             break;
         default:
             return;
     }
 }
-
-
 // Método
 // Muda values of the calculator screen
-updateScreen(operationValue = null, operation = null, current = null, previous = null) {
+updateScreen(
+    operationValue = null, 
+    operation = null, 
+    current = null, 
+    previous = null
+    ) {
+    
     //Propriedade
-    this.currentOperationText.innerText += this.currentOperation; //todos os números digitados irão aparecer na tela
+    if(operationValue === null) {
+        this.currentOperationText.innerText += this.currentOperation; //todos os números digitados irão aparecer na tela
+    } else {
+            //Check if value is zero, if it is just add current value
+            if( previous === 0) {
+                operationValue = current
+            }
+
+            //Add current value to previous
+            this.previousOperationText.innerText = `${operationValue} ${operation}`; 
+            this.currentOperationText.innerText = "";
+    }   
 }
 
 }
 
 /*Instância*/
-const calc = new calculator(previusOperationText, currentOperationText);
+const calc = new calculator(previousOperationText, currentOperationText);
 
 /*Método*/
 buttons.forEach((btn)  => {
