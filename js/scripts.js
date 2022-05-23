@@ -28,7 +28,7 @@ addDigit(digit) {
 // Process all calculator operation
 processOperation(operations) {
     //Checar se current esta vazia
-    if (this.currentOperationText.innerText === "") { 
+    if (this.currentOperationText.innerText === "" && operations !== "C") { 
          // Mudança operation
         if (this.previousOperationText.innerText !== "") { 
             this.changeOperation(operations);
@@ -59,6 +59,18 @@ processOperation(operations) {
             operationValue = previous * current;
             this.updateScreen(operationValue, operations, current, previous);
             break;
+        case "DEL":
+            this.processDelOperator();
+            break;
+        case "CE":
+            this.processClearCurrentOperation();
+            break;
+        case "C":
+            this.processClearOperation();
+            break; 
+        case "=":
+            this.processEqualOperator();
+            break;       
         default:
             return;
     }
@@ -99,7 +111,29 @@ changeOperation(operations) {
         this.previousOperationText.innerText.slice(0, -1) + operations;
 }
 
+// Deleta o último digito
+processDelOperator() {
+    this.currentOperationText.innerText =
+        this.currentOperationText.innerText.slice(0, -1);
+}
 
+// Limpa current operation
+processClearCurrentOperation() {
+    this.currentOperationText.innerText = "";
+}
+
+// Limpa all operation
+processClearOperation() {
+    this.currentOperationText.innerText = "";
+    this.previousOperationText.innerText = "";
+}
+
+// process an oparation
+processEqualOperator() {
+    const operation = previousOperationText.innerText.split(" ")[1];
+
+    this.processOperation(operation);
+}
 }
 /*Instância*/
 const calc = new calculator(previousOperationText, currentOperationText);

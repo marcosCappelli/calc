@@ -14,9 +14,9 @@ body {
 }
 
 #calc {
-    width: 400px;
+    width: 600px;
     padding: 0.5em;
-    background-color: rgb(102, 173, 173);
+    background-color: rgb(44, 44, 39);
     color: red;
     display: flex;
     flex-direction: column;
@@ -41,13 +41,15 @@ body {
 }
 
 #previous-operation {
-    color: black;
+    color: rgb(196, 116, 116);
+    font-size: 2em;
 }
 
 #current-operation {
     font-size: 3em;
     font-weight: 700;
     color: black;
+    
 }
 
 #buttons-container {
@@ -66,7 +68,7 @@ body {
 }
 
 #buttons-container .number {
-    background-color: rgb(87, 76, 76);
+    background-color: rgb(187, 166, 166);
 }
 
 #buttons-container button:hover {
@@ -80,5 +82,5 @@ body {
 }
 
 #buttons-container #equal-btn:hover {
-    background-color: rgb(87, 76, 76);
+    background-color: rgb(131, 127, 127);
 }
